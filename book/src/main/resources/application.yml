@@ -1,0 +1,19 @@
+server:
+  port: 8001
+servlet:
+  context-path: /
+spring:
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate.default_schema: public
+      hibernate.format_sql: true
+      hibernate.jdbc.time_zone: UTC
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/projet_microservice
+    username: postgres
+    password: Douldoul1

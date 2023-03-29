@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/book/book.iml" filepath="$PROJECT_DIR$/book/book.iml" />
+      <module fileurl="file://$PROJECT_DIR$/loan_management/loan_management.iml" filepath="$PROJECT_DIR$/loan_management/loan_management.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/projet.iml" filepath="$PROJECT_DIR$/.idea/projet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/reader/reader.iml" filepath="$PROJECT_DIR$/reader/reader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/subscription/subscription.iml" filepath="$PROJECT_DIR$/subscription/subscription.iml" />
+      <module fileurl="file://$PROJECT_DIR$/subscription_plan/subscription_plan.iml" filepath="$PROJECT_DIR$/subscription_plan/subscription_plan.iml" />
+    </modules>
+  </component>
+</project>

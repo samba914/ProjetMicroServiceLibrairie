@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="loan_management" />
+        <module name="subscription" />
+        <module name="reader" />
+        <module name="subscription_plan" />
+        <module name="book" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="book" target="17" />
+      <module name="loan_management" target="17" />
+      <module name="reader" target="17" />
+      <module name="subscription" target="17" />
+      <module name="subscription_plan" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="book" options="-parameters" />
+      <module name="loan_management" options="-parameters" />
+      <module name="reader" options="-parameters" />
+      <module name="subscription" options="-parameters" />
+      <module name="subscription_plan" options="-parameters" />
+    </option>
+  </component>
+</project>
