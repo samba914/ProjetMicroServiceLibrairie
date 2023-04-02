@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface SubscriptionPlanRepository extends JpaRepository<SubscriptionPlan, Long> {
 
     Optional<SubscriptionPlan> findByNomIgnoreCase(String nom);
+
 }

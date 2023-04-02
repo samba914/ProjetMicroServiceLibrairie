@@ -1,10 +1,8 @@
-package com.samba_mohamed.bookshop.book.Exception;
+package com.samba_mohamed.bookshop.reader.handler;
 
-import com.samba_mohamed.bookshop.book.Exception.ApiError;
-import com.samba_mohamed.bookshop.book.Exception.BookNotFoundException;
+import com.samba_mohamed.bookshop.reader.exception.ReaderNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -12,8 +10,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestControllerAdvice
 public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(BookNotFoundException.class)
-    protected ResponseEntity<Object> handleEmpruntNotFound(BookNotFoundException ex) {
+    @ExceptionHandler(ReaderNotFoundException.class)
+    protected ResponseEntity<Object> handleReaderNotFound(ReaderNotFoundException ex) {
         ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getMessage());
         return buildResponseEntity(apiError);
     }

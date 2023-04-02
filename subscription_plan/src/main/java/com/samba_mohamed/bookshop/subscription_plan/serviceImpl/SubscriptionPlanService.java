@@ -28,6 +28,7 @@ public class SubscriptionPlanService implements ISubscriptionPlanService {
         return subscriptionPlanRepository.findByNomIgnoreCase(nom)
                 .orElseThrow(() -> new SubscriptionPlanNotFoundException("Le plan d'abonnement avec le nom '" + nom + "' est introuvable"));
     }
+
     @Override
     public List<SubscriptionPlan> createManySubscriptionPlans(List<SubscriptionPlan> subscriptionPlans){
         try{

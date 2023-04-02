@@ -1,4 +1,4 @@
-package com.samba_mohamed.bookshop.book.Exception;
+package com.samba_mohamed.bookshop.reader.handler;
 
 import lombok.Data;
 import org.springframework.http.HttpStatus;

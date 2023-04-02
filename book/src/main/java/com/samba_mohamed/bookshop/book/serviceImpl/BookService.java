@@ -66,7 +66,8 @@ public class BookService implements IBookService {
 
     public void deleteBook(Long id) {
         //gérer le fait que si lié à un emprunt il y aura probleme
-        //peut etre gérer sa avec le field disponible
+        //peut etre gérer sa avec le field disponible. A voir
+
         bookRepository.delete(getBookById(id));
     }
 

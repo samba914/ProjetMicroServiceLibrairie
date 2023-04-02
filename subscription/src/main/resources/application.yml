@@ -1,0 +1,23 @@
+server:
+  port: 8004
+servlet:
+  context-path: /
+spring:
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate.default_schema: public
+      hibernate.format_sql: true
+      hibernate.jdbc.time_zone: UTC
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/projet_microservice_subscription
+    username: postgres
+    password: Douldoul1
+
+microservices:
+  plan-service-url : http://localhost:8003/api
+  lecteur-service-url : http://localhost:8002/api
