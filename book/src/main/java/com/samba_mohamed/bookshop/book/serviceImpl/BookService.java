@@ -20,11 +20,6 @@ public class BookService implements IBookService {
         return bookRepository.findAll();
     }
 
-    public Book getBookById(Long id) {
-        return bookRepository.findById(id)
-                .orElseThrow(() -> new BookNotFoundException("Le livre avec l'id "+id+" est introuvale" ));
-    }
-
     public List<Book> searchBook(String keyword) {
         List<Book> livres = bookRepository.findByTitreContainingIgnoreCase(keyword);
         livres.addAll(bookRepository.findByAuteurContainingIgnoreCase(keyword));
@@ -55,8 +50,8 @@ public class BookService implements IBookService {
         return bookRepository.save(livre);
     }
 
-    public Book updateBook(Long id, Book livreDetails) {
-        Book livre = getBookById(id);
+    public Book updateBook(String isbn, Book livreDetails) {
+        Book livre = getBookByIsbn(isbn);
         livre.setTitre(livreDetails.getTitre());
         livre.setAuteur(livreDetails.getAuteur());
         livre.setIsbn(livreDetails.getIsbn());
@@ -64,11 +59,11 @@ public class BookService implements IBookService {
         return bookRepository.save(livre);
     }
 
-    public void deleteBook(Long id) {
+    public void deleteBook(String isbn) {
         //gérer le fait que si lié à un emprunt il y aura probleme
         //peut etre gérer sa avec le field disponible. A voir
 
-        bookRepository.delete(getBookById(id));
+        bookRepository.delete(getBookByIsbn(isbn));
     }
 
     public List<Book> getLivresDisponibles() {

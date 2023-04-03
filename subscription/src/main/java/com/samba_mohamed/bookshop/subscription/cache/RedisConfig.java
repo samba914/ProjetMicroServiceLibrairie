@@ -22,14 +22,13 @@ public class RedisConfig implements CachingConfigurer {
 
     @Bean
     public RedisCacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
-
-        Map<String, RedisCacheConfiguration> cacheConfigs = new HashMap<>();
-        cacheConfigs.put("reader", createCacheConfig(Duration.ofMinutes(10)));
-        cacheConfigs.put("subscriptionPlan", createCacheConfig(Duration.ofMinutes(10)));
-
+        RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
+                .disableCachingNullValues()
+                .entryTtl(Duration.ofMinutes(10))
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
 
         RedisCacheManager redisCacheManager = RedisCacheManager.builder(redisConnectionFactory)
-                .withInitialCacheConfigurations(cacheConfigs)
+                .cacheDefaults(redisCacheConfiguration)
                 .build();
 
         return redisCacheManager;

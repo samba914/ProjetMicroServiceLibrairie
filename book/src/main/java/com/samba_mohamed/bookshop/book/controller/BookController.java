@@ -21,11 +21,6 @@ public class BookController {
         return bookService.getAllBooks();
     }
 
-    @GetMapping("/{id}")
-    public Book getBookById(@PathVariable Long id) {
-        return bookService.getBookById(id);
-    }
-
     @GetMapping("/recherche")
     public List<Book> searchBook(@RequestParam String keyword) {
         return bookService.searchBook(keyword);
@@ -56,14 +51,14 @@ public class BookController {
         return new ResponseEntity<>(createdLivres, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public Book updateBook(@PathVariable Long id, @RequestBody Book livreDetails) {
-        return bookService.updateBook(id, livreDetails);
+    @PutMapping("/isbn/{isbn}")
+    public Book updateBook(@PathVariable String isbn, @RequestBody Book livreDetails) {
+        return bookService.updateBook(isbn, livreDetails);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteBook(@PathVariable Long id) {
-        bookService.deleteBook(id);
+    @DeleteMapping("/isbn/{isbn}")
+    public ResponseEntity<String> deleteBook(@PathVariable String isbn) {
+        bookService.deleteBook(isbn);
         return ResponseEntity.ok("Livre supprimé avec succès");
     }
 

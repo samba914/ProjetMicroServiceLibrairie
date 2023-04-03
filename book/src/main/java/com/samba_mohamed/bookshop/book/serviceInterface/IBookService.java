@@ -8,8 +8,6 @@ import java.util.List;
 public interface IBookService {
     List<Book> getAllBooks();
 
-    Book getBookById(Long id);
-
     List<Book> searchBook(String keyword);
     List<Book> createManyBooks(List<Book> livres);
 
@@ -23,9 +21,9 @@ public interface IBookService {
 
 
 
-    Book updateBook(Long id, Book livreDetails);
+    Book updateBook(String isbn, Book livreDetails);
 
-    void deleteBook(Long id);
+    void deleteBook(String isbn);
 
     List<Book> getLivresDisponibles();
 
