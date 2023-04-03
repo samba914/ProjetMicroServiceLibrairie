@@ -2,19 +2,26 @@ package com.samba_mohamed.bookshop.subscription.serviceImpl;
 
 import com.samba_mohamed.bookshop.subscription.dto.Reader;
 import com.samba_mohamed.bookshop.subscription.exception.ReaderNotFoundException;
-import com.samba_mohamed.bookshop.subscription.serviceInterface.IReaderClient;
+import com.samba_mohamed.bookshop.subscription.serviceInterface.IReaderClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.core.RedisTemplate;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-@Component
-public class ReaderClient implements IReaderClient {
+@Service
+public class ReaderClientService implements IReaderClientService {
 
     @Value("${microservices.lecteur-service-url}")
     private String lecteurServiceUrl;
+    @Autowired
+    private RedisCacheManager cacheManager;
 
+
+    @Cacheable(value = "reader", key = "#id" , cacheManager = "cacheManager")
     public Reader getReaderById(Long id) {
         RestTemplate restTemplate = new RestTemplate();
         Reader reader = restTemplate.getForObject(lecteurServiceUrl + "/readers/" + id, Reader.class);
@@ -23,6 +30,7 @@ public class ReaderClient implements IReaderClient {
         }
         return reader;
     }
+    @Cacheable(value = "reader", key = "#prenom + #nom" , cacheManager = "cacheManager")
     public Reader getReaderByPrenomAndNom(String prenom , String nom) {
         RestTemplate restTemplate = new RestTemplate();
         String url = lecteurServiceUrl + "/readers/nomAndPrenom?nom=%s&prenom=%s";

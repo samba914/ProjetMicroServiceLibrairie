@@ -5,25 +5,23 @@ import com.samba_mohamed.bookshop.subscription.dto.SubscriptionPlan;
 import com.samba_mohamed.bookshop.subscription.exception.SubscriptionNotFoundException;
 import com.samba_mohamed.bookshop.subscription.model.Subscription;
 import com.samba_mohamed.bookshop.subscription.repository.SubscriptionRepository;
-import com.samba_mohamed.bookshop.subscription.serviceInterface.IReaderClient;
-import com.samba_mohamed.bookshop.subscription.serviceInterface.ISubscriptionPlanClient;
+import com.samba_mohamed.bookshop.subscription.serviceInterface.IReaderClientService;
+import com.samba_mohamed.bookshop.subscription.serviceInterface.ISubscriptionPlanClientService;
 import com.samba_mohamed.bookshop.subscription.serviceInterface.ISubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class SubscriptionService  implements ISubscriptionService {
     @Autowired
     private SubscriptionRepository subscriptionRepository;
     @Autowired
-    private IReaderClient readerClient;
+    private IReaderClientService readerClient;
     @Autowired
-    private ISubscriptionPlanClient subscriptionPlanClient;
+    private ISubscriptionPlanClientService subscriptionPlanClient;
 
 
     public List<Subscription> getAllSubscriptions(){
