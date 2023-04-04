@@ -4,7 +4,9 @@ import com.samba_mohamed.bookshop.loan_management.model.Loan;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface LoanRepository extends JpaRepository<Loan,Long> {
@@ -12,4 +14,7 @@ public interface LoanRepository extends JpaRepository<Loan,Long> {
     List<Loan> findByReaderIdAndDateRetourIsNull(Long  readerId);
     List<Loan> findByIsbnAndDateRetourIsNull(String  isbn);
     List<Loan> findByDateRetourIsNull();
+    Long countByDatePretBetween(LocalDate start, LocalDate end) ;
+
+    Optional<Loan> findByReaderIdAndIsbnAndDateRetourIsNull(Long readerId, String isbn);
 }

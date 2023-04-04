@@ -8,6 +8,6 @@ public interface ILoanService {
     List<Loan> getLoansByReader(Long readerId);
     List<Loan> getNonReturnedLoansByBook(String isbn);
     Loan emprunterLivre(Long readerId, String isbn);
-    Loan retournerLivreByLoanId(Long loanId);
+
     Loan retournerLivreByReaderAndBook(Long readerId, String isbn);
 }

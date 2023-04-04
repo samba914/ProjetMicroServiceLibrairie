@@ -17,8 +17,8 @@ public class Loan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "ISBN")
-    private String ISBN;
+    @Column(name = "isbn")
+    private String isbn;
 
     @Column(name = "reader_id")
     private Long readerId;

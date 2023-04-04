@@ -21,8 +21,6 @@ public class Reader {
 
     private String prenom;
 
-    private LocalDate dateNaissance;
-
     private String adresse;
 
 }

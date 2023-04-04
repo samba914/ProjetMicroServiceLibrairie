@@ -1,0 +1,32 @@
+server:
+  port: 8005
+servlet:
+  context-path: /
+
+spring:
+  cache:
+    type: redis
+  redis:
+    host-name: localhost
+    port-number: 6379
+
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate.default_schema: public
+      hibernate.format_sql: true
+      hibernate.jdbc.time_zone: UTC
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/projet_microservice_loan
+    username: postgres
+    password: mdpPostgres
+
+microservices:
+  plan-service-url : http://localhost:8003/api
+  lecteur-service-url : http://localhost:8002/api
+  book-service-url : http://localhost:8001/api
+  subscription-serivce-url : http://localhost:8004/api

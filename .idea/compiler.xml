@@ -9,8 +9,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="loan_management" />
         <module name="subscription" />
-        <module name="reader" />
         <module name="subscription_plan" />
+        <module name="reader" />
         <module name="book" />
       </profile>
     </annotationProcessing>
