@@ -12,16 +12,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-@NoArgsConstructor
-@AllArgsConstructor
 public class SubscriptionClientService implements ISubsciptionClientService {
-    @Value("${microservices.plan-service-url}")
-    private String subscriptionPlanClientUrl ;
+    @Value("${microservices.subscription-service-url}")
+    private String subscriptionClientUrl ;
 
     @Override
     public Subscription getSubscriptionValidByReaderId(Long readerId) {
         RestTemplate restTemplate = new RestTemplate();
-        Subscription subscription = restTemplate.getForObject(subscriptionPlanClientUrl + "/subscriptions/reader/valid/" + readerId, Subscription.class);
+        Subscription subscription = restTemplate.getForObject(subscriptionClientUrl + "/subscriptions/reader/valid/" + readerId, Subscription.class);
         return subscription;
     }
 }

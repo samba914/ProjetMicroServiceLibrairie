@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-@NoArgsConstructor
-@AllArgsConstructor
 public class BookClientService implements IBookClientService {
     @Value("${microservices.book-service-url}")
     private String bookClientUrl ;

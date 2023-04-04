@@ -8,8 +8,6 @@ import com.samba_mohamed.bookshop.loan_management.exception.*;
 import com.samba_mohamed.bookshop.loan_management.model.Loan;
 import com.samba_mohamed.bookshop.loan_management.repository.LoanRepository;
 import com.samba_mohamed.bookshop.loan_management.serviceInterface.*;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,20 +16,20 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Service
-@NoArgsConstructor
-@AllArgsConstructor
 public class LoanService implements ILoanService {
     @Autowired
     private LoanRepository loanRepository;
     @Autowired
-    IReaderClientService readerService ;
+    private IReaderClientService readerService ;
 
     @Autowired
-    IBookClientService bookClientService ;
+    private IBookClientService bookClientService ;
     @Autowired
-    ISubscriptionPlanClientService subscriptionPlanClientService ;
+    private ISubscriptionPlanClientService subscriptionPlanClientService ;
     @Autowired
-    ISubsciptionClientService subsciptionClientService ;
+    private ISubsciptionClientService subsciptionClientService ;
+
+
     @Override
     public List<Loan> getLoansByReader(Long readerId) {
         return loanRepository.findByReaderId(readerId);

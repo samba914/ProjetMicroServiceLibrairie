@@ -14,8 +14,6 @@ import org.springframework.web.client.RestTemplate;
 
 
 @Service
-@NoArgsConstructor
-@AllArgsConstructor
 public class ReaderClientService implements IReaderClientService {
 
     @Value("${microservices.lecteur-service-url}")

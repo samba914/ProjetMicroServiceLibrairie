@@ -32,11 +32,6 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
         ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getMessage());
         return buildResponseEntity(apiError);
     }
-    @ExceptionHandler(SubscriptionPlanNotFoundException.class)
-    protected ResponseEntity<Object> handleSubscriptionPlanNotFound(SubscriptionPlanNotFoundException ex) {
-        ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
-        return buildResponseEntity(apiError);
-    }
     @ExceptionHandler(LoanNumberExceedException.class)
     protected ResponseEntity<Object> handleLoanNumberExceed(LoanNumberExceedException ex) {
         ApiError apiError = new ApiError(HttpStatus.CONFLICT, ex.getMessage());
