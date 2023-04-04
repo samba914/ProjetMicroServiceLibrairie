@@ -35,7 +35,7 @@ public class SubscriptionService  implements ISubscriptionService {
 
     @Override
     public Subscription getSubscriptionValidByReaderId(Long id) {
-        return subscriptionRepository.getSubscriptionByReaderIdAndEndDateGreaterThan(id,LocalDate.now()).orElseThrow(() -> new SubscriptionNotFoundException("Impossible de trouver l'abonnement avec l'id: " + id));
+        return subscriptionRepository.getSubscriptionByReaderIdAndEndDateGreaterThan(id,LocalDate.now()).orElse(null);
     }
 
     public Subscription getSubscriptionById(Long id)  {
