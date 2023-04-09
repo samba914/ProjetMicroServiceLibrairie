@@ -3,6 +3,7 @@ server:
 servlet:
   context-path: /
 spring:
+
   jpa:
     generate-ddl: true
     hibernate:

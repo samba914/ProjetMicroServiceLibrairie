@@ -1,5 +1,6 @@
 package com.samba_mohamed.bookshop.book.handler;
 
+import com.samba_mohamed.bookshop.book.Exception.BookNotAvailableException;
 import com.samba_mohamed.bookshop.book.Exception.BookNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,11 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(BookNotFoundException.class)
     protected ResponseEntity<Object> handleBookNotFound(BookNotFoundException ex) {
         ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getMessage());
+        return buildResponseEntity(apiError);
+    }
+    @ExceptionHandler(BookNotAvailableException.class)
+    protected ResponseEntity<Object> handleBookNotAvailable(BookNotAvailableException ex) {
+        ApiError apiError = new ApiError(HttpStatus.CONFLICT, ex.getMessage());
         return buildResponseEntity(apiError);
     }
 

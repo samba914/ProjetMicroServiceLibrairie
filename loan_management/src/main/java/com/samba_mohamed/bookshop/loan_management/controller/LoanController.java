@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/loans")
+@RequestMapping("/api/loans")
 public class LoanController {
 
     @Autowired
     private ILoanService loanService;
 
-    @GetMapping("/{readerId}")
+    @GetMapping("/reader/{readerId}")
     public List<Loan> getLoansByReader(@PathVariable Long readerId) {
         List<Loan> loans = loanService.getLoansByReader(readerId);
         return loans;
@@ -28,13 +28,13 @@ public class LoanController {
         return loans;
     }
 
-    @PostMapping("/{readerId}/{isbn}")
+    @PostMapping("/reader/{readerId}/book/{isbn}")
     public Loan emprunterLivre(@PathVariable Long readerId, @PathVariable String isbn) {
         Loan loan = loanService.emprunterLivre(readerId, isbn);
         return loan;
     }
 
-    @PutMapping("/{readerId}/{isbn}")
+    @PutMapping("/return/reader/{readerId}/book/{isbn}")
     public Loan retournerLivreByReaderAndBook(@PathVariable Long readerId, @PathVariable String isbn) {
         Loan loan = loanService.retournerLivreByReaderAndBook(readerId, isbn);
         return loan;

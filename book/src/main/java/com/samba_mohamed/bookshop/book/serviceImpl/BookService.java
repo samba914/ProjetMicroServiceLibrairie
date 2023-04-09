@@ -1,10 +1,12 @@
 package com.samba_mohamed.bookshop.book.serviceImpl;
 
 
+import com.samba_mohamed.bookshop.book.Exception.BookNotAvailableException;
 import com.samba_mohamed.bookshop.book.Exception.BookNotFoundException;
 import com.samba_mohamed.bookshop.book.model.Book;
 import com.samba_mohamed.bookshop.book.repository.BookRepository;
 import com.samba_mohamed.bookshop.book.serviceInterface.IBookService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,6 +59,18 @@ public class BookService implements IBookService {
         livre.setIsbn(livreDetails.getIsbn());
         livre.setDisponible(livreDetails.isDisponible());
         return bookRepository.save(livre);
+    }
+
+    @Transactional
+    public Book updateBookState(String isbn, boolean isDisponible){
+        Book book = bookRepository.findByIsbnForUpdate(isbn)
+                .orElseThrow(() -> new BookNotFoundException("Le livre avec l'ibn '"+isbn+"' est introuvale"));
+        if(isDisponible==false && !book.isDisponible()){
+            throw new BookNotAvailableException("Le livre n'est déjà plus disponible");
+        }
+        book.setDisponible(isDisponible);
+        return  book;
+
     }
 
     public void deleteBook(String isbn) {

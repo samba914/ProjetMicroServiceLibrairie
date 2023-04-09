@@ -56,7 +56,7 @@ public class LoanService implements ILoanService {
         }
         Subscription subscription = subsciptionClientService.getSubscriptionValidByReaderId(readerId) ;
         if (subscription == null){
-            throw new NoSubscriptionValidFoundForReaderException("Aucun abonnement valide à été trouvé pour le idReader : " + readerId);
+            throw new NoSubscriptionValidFoundForReaderException("Aucun abonnement valide a été trouvé pour le lecteur avec l'id : " + readerId);
         }
         LocalDate start = LocalDate.now().with(DayOfWeek.MONDAY);
         LocalDate end = LocalDate.now();
@@ -69,6 +69,8 @@ public class LoanService implements ILoanService {
         if (nbEmpruntEffectue >= nombreEmpruntParSemaine ){
             throw new LoanNumberExceedException("Le nombre d'emprunt autorisé qui est de : "+nombreEmpruntParSemaine + " a été atteint !") ;
         }
+        //update book state
+        bookClientService.setBookState(isbn,false);
         Loan loan = new Loan();
         loan.setIsbn(book.getIsbn());
         loan.setReaderId(readerId);
@@ -82,6 +84,7 @@ public class LoanService implements ILoanService {
         if (loan == null) {
             throw new LoanException("Il n'existe pas d'emprunt en cours pour le livre :"+ " isbn "+" pour le reader : "+readerId);
         }
+        bookClientService.setBookState(isbn,true);
         loan.setDateRetour(LocalDate.now());
         return loanRepository.save(loan);
     }

@@ -22,7 +22,7 @@ public class SubscriptionPlanClientService implements ISubscriptionPlanClientSer
     private RedisCacheManager cacheManager;
 
     @Override
-    @Cacheable(value = "subscriptionPlan", key = "#plan_id" , cacheManager = "cacheManager")
+    //@Cacheable(value = "subscriptionPlan", key = "#plan_id" , cacheManager = "cacheManager")
     public SubscriptionPlan getSuscriptionPlanById(Long plan_id) {
         RestTemplate restTemplate = new RestTemplate();
         SubscriptionPlan plan = restTemplate.getForObject(subscriptionPlanServiceUrl + "/subscriptionplans/" + plan_id, SubscriptionPlan.class);
@@ -33,7 +33,7 @@ public class SubscriptionPlanClientService implements ISubscriptionPlanClientSer
     }
 
     @Override
-    @Cacheable(value = "subscriptionPlan", key = "#nom" , cacheManager = "cacheManager")
+    //@Cacheable(value = "subscriptionPlan", key = "#nom" , cacheManager = "cacheManager")
     public SubscriptionPlan getSuscriptionPlanByNom(String nom) {
         RestTemplate restTemplate = new RestTemplate();
         SubscriptionPlan plan = restTemplate.getForObject(subscriptionPlanServiceUrl + "/subscriptionplans/nom/" + nom, SubscriptionPlan.class);

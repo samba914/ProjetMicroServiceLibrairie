@@ -21,7 +21,7 @@ public class ReaderClientService implements IReaderClientService {
     private RedisCacheManager cacheManager;
 
 
-    @Cacheable(value = "reader", key = "#id" , cacheManager = "cacheManager")
+    //@Cacheable(value = "reader", key = "#id" , cacheManager = "cacheManager")
     public Reader getReaderById(Long id) {
         RestTemplate restTemplate = new RestTemplate();
         Reader reader = restTemplate.getForObject(lecteurServiceUrl + "/readers/" + id, Reader.class);
@@ -30,7 +30,7 @@ public class ReaderClientService implements IReaderClientService {
         }
         return reader;
     }
-    @Cacheable(value = "reader", key = "#prenom + #nom" , cacheManager = "cacheManager")
+    //@Cacheable(value = "reader", key = "#prenom + #nom" , cacheManager = "cacheManager")
     public Reader getReaderByPrenomAndNom(String prenom , String nom) {
         RestTemplate restTemplate = new RestTemplate();
         String url = lecteurServiceUrl + "/readers/nomAndPrenom?nom=%s&prenom=%s";

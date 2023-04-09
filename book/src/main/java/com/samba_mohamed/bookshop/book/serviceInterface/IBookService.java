@@ -19,7 +19,7 @@ public interface IBookService {
 
     Book createBook(Book livre);
 
-
+    Book updateBookState(String isbn, boolean isDisponible);
 
     Book updateBook(String isbn, Book livreDetails);
 

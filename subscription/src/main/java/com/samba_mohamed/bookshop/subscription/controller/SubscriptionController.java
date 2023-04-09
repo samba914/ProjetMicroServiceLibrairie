@@ -41,7 +41,7 @@ public class SubscriptionController {
         return subscriptionService.getSubscriptionsBySubscriptionPlanId(subscriptionPlanId);
     }
 
-    @PostMapping("/{readerId}/{subscriptionPlanId}")
+    @PostMapping("/reader/{readerId}/plan/{subscriptionPlanId}")
     public Subscription createSubscription(@PathVariable("readerId") Long readerId, @PathVariable("subscriptionPlanId") Long subscriptionPlanId) {
         return subscriptionService.createSubscription(readerId, subscriptionPlanId);
     }

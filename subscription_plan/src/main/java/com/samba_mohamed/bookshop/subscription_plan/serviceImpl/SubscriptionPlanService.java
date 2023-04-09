@@ -69,7 +69,9 @@ public class SubscriptionPlanService implements ISubscriptionPlanService {
 
         subscriptionPlan.setDureeEnMois(subscriptionPlanDetails.getDureeEnMois());
         subscriptionPlan.setNombreEmpruntParSemaine(subscriptionPlanDetails.getNombreEmpruntParSemaine());
-        return subscriptionPlanRepository.save(subscriptionPlan);
+
+        subscriptionPlan = subscriptionPlanRepository.save(subscriptionPlan);
+        return subscriptionPlan;
     }
 
 

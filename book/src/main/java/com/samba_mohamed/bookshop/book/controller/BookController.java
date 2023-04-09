@@ -55,6 +55,10 @@ public class BookController {
     public Book updateBook(@PathVariable String isbn, @RequestBody Book livreDetails) {
         return bookService.updateBook(isbn, livreDetails);
     }
+    @PutMapping("/isbn/{isbn}/updateState")
+    public Book updateBookState(@PathVariable String isbn, @RequestParam boolean disponible) {
+        return bookService.updateBookState(isbn, disponible);
+    }
 
     @DeleteMapping("/isbn/{isbn}")
     public ResponseEntity<String> deleteBook(@PathVariable String isbn) {
