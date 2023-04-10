@@ -7,17 +7,22 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="server-eureka" />
+        <module name="reader" />
+        <module name="book" />
         <module name="loan_management" />
         <module name="subscription" />
         <module name="subscription_plan" />
-        <module name="reader" />
-        <module name="book" />
+        <module name="gateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="book" target="17" />
+      <module name="gateway" target="17" />
       <module name="loan_management" target="17" />
       <module name="reader" target="17" />
+      <module name="reader (1)" target="17" />
+      <module name="server-eureka" target="17" />
       <module name="subscription" target="17" />
       <module name="subscription_plan" target="17" />
     </bytecodeTargetLevel>
@@ -25,8 +30,10 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="book" options="-parameters" />
+      <module name="gateway" options="-parameters" />
       <module name="loan_management" options="-parameters" />
       <module name="reader" options="-parameters" />
+      <module name="server-eureka" options="-parameters" />
       <module name="subscription" options="-parameters" />
       <module name="subscription_plan" options="-parameters" />
     </option>

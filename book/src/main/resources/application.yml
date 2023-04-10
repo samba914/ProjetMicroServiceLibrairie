@@ -1,8 +1,10 @@
 server:
   port: 8001
-servlet:
-  context-path: /
+
+
 spring:
+  application:
+    name: book-service
   jpa:
     generate-ddl: true
     hibernate:
@@ -17,3 +19,8 @@ spring:
     url: jdbc:postgresql://localhost:5432/projet_microservice
     username: postgres
     password: Douldoul1
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka

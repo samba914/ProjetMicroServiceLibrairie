@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  cache:
+    type: redis
+  redis:
+    host-name: localhost
+    port-number: 6379
+    prefix: gateway-cache
+  cloud:
+    gateway:
+      routes:
+        - id: book
+          uri: lb://book-service
+          predicates:
+            - Path=/api/books/**
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+    register-with-eureka: false
+  instance:
+    prefer-ip-address: true
+
+
