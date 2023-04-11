@@ -1,9 +1,9 @@
 server:
   port: 8004
-servlet:
-  context-path: /
 
 spring:
+  application:
+    name: subscription-service
   cache:
     type: redis
   redis:
@@ -29,3 +29,8 @@ spring:
 microservices:
   plan-service-url : http://localhost:8003/api
   lecteur-service-url : http://localhost:8002/api
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka

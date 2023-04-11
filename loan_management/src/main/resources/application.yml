@@ -1,9 +1,9 @@
 server:
   port: 8005
-servlet:
-  context-path: /
 
 spring:
+  application:
+    name: loan-service
   cache:
     type: redis
   redis:
@@ -30,3 +30,8 @@ microservices:
   lecteur-service-url : http://localhost:8002/api
   book-service-url : http://localhost:8001/api
   subscription-service-url : http://localhost:8004/api
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka

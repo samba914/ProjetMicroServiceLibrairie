@@ -15,6 +15,22 @@ spring:
           uri: lb://book-service
           predicates:
             - Path=/api/books/**
+        - id: reader
+          uri: lb://reader-service
+          predicates:
+            - Path=/api/readers/**
+        - id: subscription
+          uri: lb://subscription-service
+          predicates:
+            - Path=/api/subscriptions/**
+        - id: subscriptionplan
+          uri: lb://subscription-plan-service
+          predicates:
+            - Path=/api/subscription-plans/**
+        - id: loan
+          uri: lb://loan-service
+          predicates:
+            - Path=/api/loans/**
 
 eureka:
   client:
