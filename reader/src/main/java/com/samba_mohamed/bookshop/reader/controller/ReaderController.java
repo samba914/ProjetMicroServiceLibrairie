@@ -3,6 +3,9 @@ package com.samba_mohamed.bookshop.reader.controller;
 import com.samba_mohamed.bookshop.reader.model.Reader;
 import com.samba_mohamed.bookshop.reader.serviceInterface.IReaderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +22,12 @@ public class ReaderController {
     private IReaderService readerService;
 
     @GetMapping
+    @Cacheable("readers")
     public List<Reader> getAllReaders() {
         return readerService.getAllReaders();
     }
+
+    @CacheEvict(value="readers")
     @PostMapping("/createmanyreaders")
     public ResponseEntity<List<Reader>> createManyReaders(@RequestBody List<Reader> readers) {
         List<Reader> createdLivres = readerService.createManyReaders(readers);
@@ -29,6 +35,7 @@ public class ReaderController {
     }
 
     @GetMapping("/{id}")
+    @Cacheable(value = "reader", key = "#id")
     public Reader getReaderById(@PathVariable Long id) {
         return readerService.getReaderById(id);
     }
@@ -48,21 +55,25 @@ public class ReaderController {
         return readerService.getReaderByDateDeNaissance(dateNaissance);
     }
 
+    @CachePut(value = "reader", key = "#result.id")
+    @CacheEvict(value="readers")
     @PostMapping
     public Reader createReader(@RequestBody Reader reader) {
         return readerService.createReader(reader);
     }
 
+    @CachePut(value = "reader", key = "#id")
+    @CacheEvict(value="readers")
     @PutMapping("/{id}")
     public Reader updateReader(@PathVariable Long id, @RequestBody Reader readerDetails) {
         return readerService.updateReader(id, readerDetails);
     }
 
     @DeleteMapping("/{id}")
+    @CacheEvict(value = {"reader", "readers"}, allEntries = true, key = "#id")
     public ResponseEntity<String>  deleteReader(@PathVariable Long id) {
         readerService.deleteReader(id);
         return ResponseEntity.ok("Lecteur supprimé avec succès");
     }
-
 
 }
