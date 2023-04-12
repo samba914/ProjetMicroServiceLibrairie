@@ -22,7 +22,7 @@ public class ReaderController {
     private IReaderService readerService;
 
     @GetMapping
-    @Cacheable(value="readers", key = "#root.methodName")
+    @Cacheable(value="readers")
     public List<Reader> getAllReaders() {
         return readerService.getAllReaders();
     }
@@ -35,7 +35,7 @@ public class ReaderController {
     }
 
     @GetMapping("/{id}")
-    @Cacheable(value = "readers", key = "#id")
+    @Cacheable(value = "reader", key = "#id")
     public Reader getReaderById(@PathVariable Long id) {
         return readerService.getReaderById(id);
     }
@@ -55,20 +55,22 @@ public class ReaderController {
         return readerService.getReaderByDateDeNaissance(dateNaissance);
     }
 
-    @CachePut(value = "readers", key = "#result.id")
+    @CacheEvict(value="readers", allEntries = true)
+    @CachePut(value = "reader", key = "#result.id")
     @PostMapping
     public Reader createReader(@RequestBody Reader reader) {
         return readerService.createReader(reader);
     }
 
-    @CachePut(value = "readers", key = "#id")
+    @CachePut(value = "reader", key = "#id")
+    @CacheEvict(value="readers", allEntries = true)
     @PutMapping("/{id}")
     public Reader updateReader(@PathVariable Long id, @RequestBody Reader readerDetails) {
         return readerService.updateReader(id, readerDetails);
     }
 
     @DeleteMapping("/{id}")
-    @CacheEvict(value = "readers", key = "#id")
+    @CacheEvict(value = {"reader", "readers"}, allEntries = true, key = "#id")
     public ResponseEntity<String>  deleteReader(@PathVariable Long id) {
         readerService.deleteReader(id);
         return ResponseEntity.ok("Lecteur supprimé avec succès");
