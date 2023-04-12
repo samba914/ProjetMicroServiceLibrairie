@@ -19,7 +19,7 @@ public class BookController {
     @Autowired
     private IBookService bookService;
 
-    @Cacheable(value = "booksCache")
+    @Cacheable(value = "booksCache" ,key = "#root.methodName")
     @GetMapping
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
@@ -45,8 +45,7 @@ public class BookController {
         return bookService.getBooksByAuteur(auteur);
     }
 
-    @CachePut(value = "bookCache", key = "#livre.isbn")
-    @CacheEvict(value = "booksCache")
+    @CachePut(value = "booksCache", key = "#livre.isbn")
     @PostMapping
     public ResponseEntity<Book> createBook(@RequestBody Book livre) {
         Book createdLivre = bookService.createBook(livre);
@@ -60,21 +59,19 @@ public class BookController {
         return new ResponseEntity<>(createdLivres, HttpStatus.CREATED);
     }
 
-    @CachePut(value = "bookCache", key = "#isbn")
-    @CacheEvict(value = "booksCache")
+    @CachePut(value = "booksCache", key = "#isbn")
     @PutMapping("/isbn/{isbn}")
     public Book updateBook(@PathVariable String isbn, @RequestBody Book livreDetails) {
         return bookService.updateBook(isbn, livreDetails);
     }
 
-    @CachePut(value = "bookCache", key = "#isbn")
-    @CacheEvict(value = "booksCache")
+    @CachePut(value = "booksCache", key = "#isbn")
     @PutMapping("/isbn/{isbn}/updateState")
     public Book updateBookState(@PathVariable String isbn, @RequestParam boolean disponible) {
         return bookService.updateBookState(isbn, disponible);
     }
 
-    @CacheEvict(value = {"booksCache","booksCaches"}, allEntries = true, key = "#isbn")
+    @CacheEvict(value = "booksCaches", key = "#isbn")
     @DeleteMapping("/isbn/{isbn}")
     public ResponseEntity<String> deleteBook(@PathVariable String isbn) {
         bookService.deleteBook(isbn);
@@ -87,7 +84,7 @@ public class BookController {
 
     }
 
-    @Cacheable(value = "bookCache" , key="#isbn")
+    @Cacheable(value = "booksCache" , key="#isbn")
     @GetMapping("/isbn/{isbn}")
     public Book getBookByIsbn(@PathVariable String isbn) {
         return bookService.getBookByIsbn(isbn);

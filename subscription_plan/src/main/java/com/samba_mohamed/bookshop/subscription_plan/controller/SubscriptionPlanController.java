@@ -4,6 +4,7 @@ import com.samba_mohamed.bookshop.subscription_plan.model.SubscriptionPlan;
 import com.samba_mohamed.bookshop.subscription_plan.serviceInterface.ISubscriptionPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,12 +17,12 @@ public class SubscriptionPlanController {
     private ISubscriptionPlanService subscriptionPlanService;
 
     @GetMapping("")
-    @Cacheable(value = "subscription_plans")
+    @Cacheable(value = "subscription_plans", key = "#root.methodName")
     public List<SubscriptionPlan> getAllSubscriptionPlans() {
         return subscriptionPlanService.getAllSubscriptionPlans();
     }
 
-    @Cacheable(value="subscrption_plan", key="#id")
+    @Cacheable(value="subscription_plans", key="#id")
     @GetMapping("/{id}")
     public SubscriptionPlan getSubscriptionPlanById(@PathVariable Long id) {
         return subscriptionPlanService.getSubscriptionPlanById(id);
@@ -32,8 +33,7 @@ public class SubscriptionPlanController {
     }
 
     @PostMapping("")
-    @Cacheable(value="subscrption_plan", key="#result.id")
-    @CacheEvict(value="subscrption_plans")
+    @Cacheable(value="subscription_plans", key="#result.id")
     public SubscriptionPlan createSubscriptionPlan(@RequestBody SubscriptionPlan subscriptionPlan) {
         return subscriptionPlanService.createSubscriptionPlan(subscriptionPlan);
     }
@@ -44,14 +44,13 @@ public class SubscriptionPlanController {
     }
 
     @PutMapping("/{id}")
-    @Cacheable(value="subscrption_plan", key="#id")
-    @CacheEvict(value="subscrption_plans")
+    @CachePut(value="subscription_plans", key="#id")
     public SubscriptionPlan updateSubscriptionPlan(@PathVariable Long id, @RequestBody SubscriptionPlan subscriptionPlanDetails) {
         return subscriptionPlanService.updateSubscriptionPlan(id, subscriptionPlanDetails);
     }
 
     @DeleteMapping("/{id}")
-    @CacheEvict(value = {"subscrption_plan", "subscrption_plans"}, allEntries = true, key = "#id")
+    @CacheEvict(value = "subscription_plans", key = "#id")
     public void deleteSubscriptionPlan(@PathVariable Long id) {
         subscriptionPlanService.deleteSubscriptionPlan(id);
     }
