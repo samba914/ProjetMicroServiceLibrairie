@@ -7,7 +7,6 @@ spring:
   redis:
     host-name: localhost
     port-number: 6379
-    prefix: gateway-cache
   cloud:
     gateway:
       routes:

@@ -18,6 +18,8 @@ public class ReaderService implements IReaderService {
 
     @Override
     public List<Reader> getAllReaders() {
+        System.out.println("came here");
+
         return readerRepository.findAll();
     }
 
