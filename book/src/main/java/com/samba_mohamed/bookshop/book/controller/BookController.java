@@ -95,8 +95,8 @@ public class BookController {
 
     @Cacheable(value = "bookCache" , key="#isbn")
     @GetMapping("/isbn/{isbn}")
-    public Book getBookByIsbn(@PathVariable String isbn) {
-        return bookService.getBookByIsbn(isbn);
+    public ResponseEntity<Book> getBookByIsbn(@PathVariable String isbn) {
+        return ResponseEntity.ok(bookService.getBookByIsbn(isbn));
     }
 
 }
