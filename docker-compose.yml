@@ -2,7 +2,7 @@ version: '3'
 
 services:
   eureka:
-    image: server-eureka
+    image: samba914/eureka-image
     networks:
       - my-network
     ports:
@@ -12,7 +12,7 @@ services:
     ports:
       - "6379:6379"
   book:
-    iamge: book
+    image: samba914/book-image
     ports:
       - "8001:8001"
     networks:
@@ -25,7 +25,7 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
 
   reader:
-    image: reader
+    image: samba914/reader-image
     ports:
       - "8002:8002"
     networks:
@@ -38,7 +38,7 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
 
   plan:
-    image: subscription_plan
+    image: samba914/plan-image
     ports:
       - "8003:8003"
     networks:
@@ -51,7 +51,7 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
 
   subscription:
-    image: subscription
+    image: samba914/subscription-image
     ports:
       - "8004:8004"
     networks:
@@ -69,7 +69,7 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
 
   loan:
-    image: loan_management
+    image: samba914/loan-image
     ports:
       - "8005:8005"
     networks:
@@ -90,7 +90,7 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
 
   gateway:
-    image: gateway
+    image: samba914/gateway-image
     ports:
       - "8080:8080"
     networks:
