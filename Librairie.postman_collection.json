@@ -1150,7 +1150,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{server-gateway}}/api/loans/reader/7/book/4576910325121",
+							"raw": "{{server-gateway}}/api/loans/reader/1/book/4576910325121",
 							"host": [
 								"{{server-gateway}}"
 							],
