@@ -739,7 +739,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nom\": \"Standard\",\r\n    \"dureeEnMois\": 1,\r\n    \"nombreEmpruntParSemaine\": 1\r\n}"
+							"raw": "{\r\n    \"nom\": \"Standard\",\r\n    \"dureeEnMois\": 1,\r\n    \"nombreEmpruntParSemaine\": 2\r\n}"
 						},
 						"url": {
 							"raw": "{{server-gateway}}/api/subscriptionplans/1",
