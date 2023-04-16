@@ -34,6 +34,7 @@ public class SubscriptionService  implements ISubscriptionService {
     }
 
     @Override
+    //un lecteur peut avoir qu'un seul abonnement valide
     public Subscription getSubscriptionValidByReaderId(Long id) {
         return subscriptionRepository.getSubscriptionByReaderIdAndEndDateGreaterThan(id,LocalDate.now()).orElse(null);
     }
@@ -86,8 +87,12 @@ public class SubscriptionService  implements ISubscriptionService {
     }
 
     @Override
-    public Subscription CancelASubscription(Long subscriptionId)  {
-        Subscription existingSubscription = getSubscriptionById(subscriptionId);
+    public Subscription CancelASubscription(Long readerId)  {
+
+        Subscription existingSubscription = getSubscriptionValidByReaderId(readerId);
+        if(existingSubscription==null){
+            throw new SubscriptionNotFoundException("Aucun abonnement valide à annuler pour le lecteur avec l'id : "+readerId);
+        }
         //si l'abonnement est fini cela veut dire qu'il prend fin aujourd'hui
         existingSubscription.setEndDate(LocalDate.now());
         return subscriptionRepository.save(existingSubscription);

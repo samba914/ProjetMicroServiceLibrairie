@@ -10,7 +10,6 @@ public class ApiError {
     private String message;
 
     public ApiError(HttpStatus status, String message) {
-        super();
         this.status = status;
         this.message = message;
     }

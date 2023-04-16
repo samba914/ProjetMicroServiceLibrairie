@@ -3,6 +3,7 @@ package com.samba_mohamed.bookshop.book.serviceImpl;
 
 import com.samba_mohamed.bookshop.book.Exception.BookNotAvailableException;
 import com.samba_mohamed.bookshop.book.Exception.BookNotFoundException;
+import com.samba_mohamed.bookshop.book.Exception.FormatISBNIncorrectException;
 import com.samba_mohamed.bookshop.book.model.Book;
 import com.samba_mohamed.bookshop.book.repository.BookRepository;
 import com.samba_mohamed.bookshop.book.serviceInterface.IBookService;
@@ -10,6 +11,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -30,7 +32,11 @@ public class BookService implements IBookService {
 
     @Override
     public List<Book> createManyBooks(List<Book> livres) {
-        return bookRepository.saveAll(livres);
+        List<Book> newList = new ArrayList<>();
+        for(Book b : livres){
+            newList.add(createBook(b));
+        }
+        return  newList;
     }
 
     public Book searchBookByTitre(String titre) {
@@ -49,7 +55,13 @@ public class BookService implements IBookService {
     }
 
     public Book createBook(Book livre) {
-        return bookRepository.save(livre);
+        String isbn= livre.getIsbn();
+        if (isbn.matches("\\d+") && (isbn.length() == 10 || isbn.length() == 13)) {
+            return bookRepository.save(livre);
+        } else {
+            throw new FormatISBNIncorrectException("L'isbn doit être composée uniquement de chiffres et avoir une longueur de 10 ou 13 caractères.");
+        }
+
     }
 
     public Book updateBook(String isbn, Book livreDetails) {
@@ -74,8 +86,8 @@ public class BookService implements IBookService {
     }
 
     public void deleteBook(String isbn) {
-        //gérer le fait que si lié à un emprunt il y aura probleme
-        //peut etre gérer sa avec le field disponible. A voir
+        //gérer le fait que si lié à un emprunt il y aura probleme ??
+        //peut etre gérer sa avec le field disponible. A voir ultérieurement ...
 
         bookRepository.delete(getBookByIsbn(isbn));
     }
@@ -88,4 +100,9 @@ public class BookService implements IBookService {
         return bookRepository.findByIsbn(isbn)
                 .orElseThrow(() -> new BookNotFoundException("Le livre avec l'isbn "+isbn+" est introuvale"));
     }
+
+    public void deleteAllBooks(){
+        bookRepository.deleteAll();
+    }
+
 }

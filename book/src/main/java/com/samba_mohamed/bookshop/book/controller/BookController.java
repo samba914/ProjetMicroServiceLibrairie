@@ -80,6 +80,12 @@ public class BookController {
         bookService.deleteBook(isbn);
         return ResponseEntity.ok("Livre supprimé avec succès");
     }
+    @CacheEvict(value = "booksCaches", allEntries = true)
+    @DeleteMapping("/deleteAll")
+    public ResponseEntity<String> deleteAllBooks() {
+        bookService.deleteAllBooks();
+        return ResponseEntity.ok("Tous les livres supprimés avec succès");
+    }
 
     @GetMapping("/disponible")
     public List<Book> getLivresDisponibles() {

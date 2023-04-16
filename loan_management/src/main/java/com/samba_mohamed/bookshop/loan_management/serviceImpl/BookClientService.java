@@ -22,9 +22,8 @@ public class BookClientService implements IBookClientService {
     @Override
     public Book getBookByIsbn(String isbn) {
         RestTemplate restTemplate = new RestTemplate();
-        Book book = restTemplate.getForObject(bookClientUrl + "/books/isbn/" + isbn, Book.class);
-
-        return book;
+        ResponseEntity<Book> response = restTemplate.getForEntity(bookClientUrl + "/books/isbn/" + isbn, Book.class);
+        return response.getBody();
     }
 
     @Override

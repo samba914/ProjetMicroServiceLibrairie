@@ -4,7 +4,9 @@ import com.samba_mohamed.bookshop.subscription_plan.model.SubscriptionPlan;
 import com.samba_mohamed.bookshop.subscription_plan.serviceInterface.ISubscriptionPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,7 +34,7 @@ public class SubscriptionPlanController {
     }
 
     @PostMapping("")
-    @Cacheable(value="subscrption_plan", key="#result.id")
+    @CachePut(value="subscrption_plan", key="#result.id")
     @CacheEvict(value="subscrption_plans", allEntries = true)
     public SubscriptionPlan createSubscriptionPlan(@RequestBody SubscriptionPlan subscriptionPlan) {
         return subscriptionPlanService.createSubscriptionPlan(subscriptionPlan);
@@ -44,7 +46,7 @@ public class SubscriptionPlanController {
     }
 
     @PutMapping("/{id}")
-    @Cacheable(value="subscrption_plan", key="#id")
+    @CachePut(value="subscrption_plan", key="#id")
     @CacheEvict(value="subscrption_plans", allEntries = true)
     public SubscriptionPlan updateSubscriptionPlan(@PathVariable Long id, @RequestBody SubscriptionPlan subscriptionPlanDetails) {
         return subscriptionPlanService.updateSubscriptionPlan(id, subscriptionPlanDetails);
@@ -52,7 +54,8 @@ public class SubscriptionPlanController {
 
     @DeleteMapping("/{id}")
     @CacheEvict(value = {"subscrption_plan", "subscrption_plans"}, allEntries = true, key = "#id")
-    public void deleteSubscriptionPlan(@PathVariable Long id) {
+    public ResponseEntity<String> deleteSubscriptionPlan(@PathVariable Long id) {
         subscriptionPlanService.deleteSubscriptionPlan(id);
+        return ResponseEntity.ok("Plan supprimé avec succès");
     }
 }

@@ -3,6 +3,7 @@ package com.samba_mohamed.bookshop.subscription.controller;
 import com.samba_mohamed.bookshop.subscription.model.Subscription;
 import com.samba_mohamed.bookshop.subscription.serviceInterface.ISubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,14 +47,16 @@ public class SubscriptionController {
         return subscriptionService.createSubscription(readerId, subscriptionPlanId);
     }
 
-    @PutMapping("/cancel/{id}")
-    public Subscription updateSubscription(@PathVariable("id") Long subscriptionId) {
-        return subscriptionService.CancelASubscription(subscriptionId);
+    @PutMapping("/cancel/reader/{readerId}")
+    public Subscription updateSubscription(@PathVariable("readerId") Long readerId) {
+        return subscriptionService.CancelASubscription(readerId);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteSubscriptionById(@PathVariable("id") Long id) {
+    public ResponseEntity<String> deleteSubscriptionById(@PathVariable("id") Long id) {
         subscriptionService.deleteSubscriptionById(id);
+        return ResponseEntity.ok("Abonnement supprimé avec succès");
+
     }
 
 }

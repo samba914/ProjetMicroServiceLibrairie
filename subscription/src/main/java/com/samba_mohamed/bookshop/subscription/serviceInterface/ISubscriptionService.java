@@ -21,7 +21,7 @@ public interface ISubscriptionService {
 
     Subscription createSubscription(Long readerId, Long subscriptionPlanId);
 
-    Subscription CancelASubscription(Long subscriptionId);
+    Subscription CancelASubscription(Long readerId);
 
     Subscription getSubscriptionByReaderIdAndPlanId(Long readerId, Long planId);
 

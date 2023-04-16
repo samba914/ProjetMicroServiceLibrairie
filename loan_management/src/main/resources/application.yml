@@ -4,12 +4,6 @@ server:
 spring:
   application:
     name: loan-service
-  cache:
-    type: redis
-  redis:
-    host-name: localhost
-    port-number: 6379
-
   jpa:
     generate-ddl: true
     hibernate:
@@ -19,11 +13,17 @@ spring:
       hibernate.default_schema: public
       hibernate.format_sql: true
       hibernate.jdbc.time_zone: UTC
+
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/projet_microservice_loan
     username: postgres
     password: Douldoul1
+  cache:
+    type: redis
+  redis:
+    host-name: localhost
+    port-number: 6379
 
 microservices:
   plan-service-url : http://localhost:8003/api
@@ -35,3 +35,4 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka
+      

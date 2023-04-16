@@ -1,0 +1,177 @@
+version: '3'
+
+services:
+  eureka:
+    image: server-eureka
+    networks:
+      - my-network
+    ports:
+      - '8761:8761'
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+  book:
+    iamge: book
+    ports:
+      - "8001:8001"
+    networks:
+      - my-network
+    depends_on:
+      - db-book
+      - eureka
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db-book:5432/projet_microservice
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+
+  reader:
+    image: reader
+    ports:
+      - "8002:8002"
+    networks:
+      - my-network
+    depends_on:
+      - db-reader
+      - eureka
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db-reader:5432/projet_microservice_reader
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+
+  plan:
+    image: subscription_plan
+    ports:
+      - "8003:8003"
+    networks:
+      - my-network
+    depends_on:
+      - db-plan
+      - eureka
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db-plan:5432/projet_microservice_plan
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+
+  subscription:
+    image: subscription
+    ports:
+      - "8004:8004"
+    networks:
+      - my-network
+    depends_on:
+      - db-subscription
+      - eureka
+      - redis
+      - plan
+      - reader
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db-subscription:5432/projet_microservice_subscription
+      MICROSERVICES_PLAN_SERVICE_URL : http://plan:8003/api
+      MICROSERVICES_LECTEUR-SERVICE-URL : http://reader:8002/api
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+
+  loan:
+    image: loan_management
+    ports:
+      - "8005:8005"
+    networks:
+      - my-network
+    depends_on:
+      - db-loan
+      - eureka
+      - plan
+      - reader
+      - subscription
+      - book
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db-loan:5432/projet_microservice_loan
+      MICROSERVICES_PLAN_SERVICE_URL: http://plan:8003/api
+      MICROSERVICES_LECTEUR-SERVICE-URL: http://reader:8002/api
+      MICROSERVICES_BOOK-SERVICE-URL: http://book:8001/api
+      MICROSERVICES_SUBSCRIPTION-SERVICE-URL: http://subscription:8004/api
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+
+  gateway:
+    image: gateway
+    ports:
+      - "8080:8080"
+    networks:
+      - my-network
+    depends_on:
+      - redis
+      - eureka
+    environment:
+      SPRING_PROFILES_ACTIVE: redis
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+
+
+  db-book:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Douldoul1
+      POSTGRES_DB: projet_microservice
+    volumes:
+      - book-data:/var/lib/postgresql/data
+    networks:
+      - my-network
+
+  db-reader:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Douldoul1
+      POSTGRES_DB: projet_microservice_reader
+    volumes:
+      - reader-data:/var/lib/postgresql/data
+    networks:
+      - my-network
+
+  db-plan:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Douldoul1
+      POSTGRES_DB: projet_microservice_plan
+    volumes:
+      - plan-data:/var/lib/postgresql/data
+    networks:
+      - my-network
+
+  db-subscription:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Douldoul1
+      POSTGRES_DB: projet_microservice_subscription
+    volumes:
+      - subscription-data:/var/lib/postgresql/data
+    networks:
+      - my-network
+
+  db-loan:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Douldoul1
+      POSTGRES_DB: projet_microservice_loan
+    volumes:
+      - loan-data:/var/lib/postgresql/data
+    networks:
+      - my-network
+
+volumes:
+  book-data:
+  loan-data:
+  reader-data:
+  subscription-data:
+  plan-data:
+
+
+
+networks:
+  my-network:
+    driver: bridge

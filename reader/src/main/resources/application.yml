@@ -4,18 +4,7 @@ server:
 spring:
   application:
     name: reader-service
-  cloud:
-    stream:
-      bindings:
-        readerOutput:
-          destination: readerExchange
-          content-type: application/json
-      rabbit:
-        bindings:
-          readerOutput:
-            producer:
-              exchangeType: topic
-              routingKeyExpression: "reader.*"
+
   jpa:
     generate-ddl: true
     hibernate:

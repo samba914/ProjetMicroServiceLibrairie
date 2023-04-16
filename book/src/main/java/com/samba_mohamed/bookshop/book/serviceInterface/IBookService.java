@@ -25,6 +25,8 @@ public interface IBookService {
 
     void deleteBook(String isbn);
 
+    void deleteAllBooks();
+
     List<Book> getLivresDisponibles();
 
     Book getBookByIsbn(String isbn);

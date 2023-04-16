@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -22,9 +23,20 @@ public class LoanController {
         return loans;
     }
 
-    @GetMapping("/book/{isbn}")
-    public List<Loan> getNonReturnedLoansByBook(@PathVariable String isbn) {
-        List<Loan> loans = loanService.getNonReturnedLoansByBook(isbn);
+    @GetMapping("/getBydateEmprunt/{date}")
+    public List<Loan> getLoansByDateEmprunt(@PathVariable LocalDate date) {
+        List<Loan> loans = loanService.getLoansByDateEmprunt(date);
+        return loans;
+    }
+
+    @GetMapping("/enCours")
+    public List<Loan> getLoansInProcess() {
+        List<Loan> loans = loanService.getLoansInProcess();
+        return loans;
+    }
+    @GetMapping("/booksNoReturnedByReader/{readerId}")
+    public List<Loan> getNonReturnedLoansByReader(@PathVariable Long readerId) {
+        List<Loan> loans = loanService.getNonReturnedLoansByReader(readerId);
         return loans;
     }
 

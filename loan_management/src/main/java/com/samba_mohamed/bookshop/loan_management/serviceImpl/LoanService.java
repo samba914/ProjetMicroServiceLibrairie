@@ -36,8 +36,18 @@ public class LoanService implements ILoanService {
     }
 
     @Override
-    public List<Loan> getNonReturnedLoansByBook(String isbn) {
-        return loanRepository.findByIsbnAndDateRetourIsNull(isbn);
+    public List<Loan> getLoansInProcess() {
+        return loanRepository.findByDateRetourIsNull();
+    }
+
+    @Override
+    public List<Loan> getNonReturnedLoansByReader(Long readerId) {
+        return loanRepository.findByReaderIdAndDateRetourIsNull(readerId);
+    }
+
+    @Override
+    public List<Loan> getLoansByDateEmprunt(LocalDate date) {
+        return loanRepository.findByDatePret(date);
     }
 
     @Override
@@ -48,7 +58,6 @@ public class LoanService implements ILoanService {
         }
         Book book = bookClientService.getBookByIsbn(isbn) ;
         if (book == null) {
-
             throw new BookNotFoundException("Book introuvable pour l'Isbn : " + isbn);
         }
         else if (!book.isDisponible()){
@@ -60,7 +69,7 @@ public class LoanService implements ILoanService {
         }
         LocalDate start = LocalDate.now().with(DayOfWeek.MONDAY);
         LocalDate end = LocalDate.now();
-        Long nbEmpruntEffectue =  loanRepository.countByDatePretBetween(start,end);
+        Long nbEmpruntEffectue =  loanRepository.countByReaderIdAndDatePretBetween(readerId,start,end);
         SubscriptionPlan subscriptionPlan = subscriptionPlanClientService.getSubscriptionPlanById(subscription.getSubscriptionPlanId()) ;
         if (subscriptionPlan == null) {
             throw new SubscriptionPlanNotFoundException("Une erreur s'est produite lors de la récupération du plan de souscription ");
