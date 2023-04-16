@@ -1,0 +1,1390 @@
+{
+	"info": {
+		"_postman_id": "3f2b603e-6ef1-4aee-830c-e63e15b528ea",
+		"name": "Librairie",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11469671"
+	},
+	"item": [
+		{
+			"name": "Book",
+			"item": [
+				{
+					"name": "AddManyBooks",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n\t\t{\r\n\t\t\t\"isbn\": \"3045217631598\",\r\n\t\t\t\"titre\": \"Harry Potter\",\r\n\t\t\t\"auteur\": \"Joanne Rowling\",\r\n\t\t\t\"editeur\": \"candles\",\r\n\t\t\t\"edition\": 2000,\r\n\t\t\t\"disponible\": true\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"isbn\": \"4576910325121\",\r\n\t\t\t\"titre\": \"Cendrillon\",\r\n\t\t\t\"auteur\": \"Charles Perrault\",\r\n\t\t\t\"editeur\": \"brunswick\",\r\n\t\t\t\"edition\": 2008,\r\n\t\t\t\"disponible\": true\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"isbn\": \"8874392156890\",\r\n\t\t\t\"titre\": \"Budget Possible\",\r\n\t\t\t\"auteur\": \"Lura Mccombs\",\r\n\t\t\t\"editeur\": \"holders\",\r\n\t\t\t\"edition\": 2006,\r\n\t\t\t\"disponible\": true\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"isbn\": \"1267854690321\",\r\n\t\t\t\"titre\": \"Golden Boy\",\r\n\t\t\t\"auteur\": \"Johnnie Workman\",\r\n\t\t\t\"editeur\": \"wars\",\r\n\t\t\t\"edition\": 2015,\r\n\t\t\t\"disponible\": true\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"isbn\": \"9874854690321\",\r\n\t\t\t\"titre\": \"Le Prince\",\r\n\t\t\t\"auteur\": \"Lou Dodd\",\r\n\t\t\t\"editeur\": \"shooting\",\r\n\t\t\t\"edition\": 2017,\r\n\t\t\t\"disponible\": true\r\n\t\t}\r\n\r\n\t]"
+						},
+						"url": {
+							"raw": "{{server-gateway}}/api/books/createmanybooks",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"books",
+								"createmanybooks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddOneBook",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\t\t\"isbn\": \"6743857690321\",\r\n\t\t\t\"titre\": \"La belle \",\r\n\t\t\t\"auteur\": \"Shaniqua Underhill\",\r\n\t\t\t\"editeur\": \"candles\",\r\n\t\t\t\"edition\": 2023,\r\n\t\t\t\"disponible\": true\r\n}"
+						},
+						"url": {
+							"raw": "{{server-gateway}}/api/books",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fail_FormatISBN_ERROR",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\t\t\"isbn\": \"67438576903AS\",\r\n\t\t\t\"titre\": \"La Maison \",\r\n\t\t\t\"auteur\": \"Shaniqua Underhill\",\r\n\t\t\t\"editeur\": \"candles\",\r\n\t\t\t\"edition\": 2023,\r\n\t\t\t\"disponible\": false\r\n}"
+						},
+						"url": {
+							"raw": "{{server-gateway}}/api/books",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetBookByIsbn",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/books/isbn/142XHNS4QCORZB74",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"books",
+								"isbn",
+								"142XHNS4QCORZB74"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fail_NotFound_GetBookByIsbn",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/books/isbn/1267854690327",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"books",
+								"isbn",
+								"1267854690327"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAuteurBooks_ContainingAuteurName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/books/auteur/containAuteurName/Lura",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"books",
+								"auteur",
+								"containAuteurName",
+								"Lura"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateBookState",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/books/isbn/3045217631598/updateState?disponible=false",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"books",
+								"isbn",
+								"3045217631598",
+								"updateState"
+							],
+							"query": [
+								{
+									"key": "disponible",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAutherBooks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/books/auteur/Shaniqua%20Underhill",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"books",
+								"auteur",
+								"Shaniqua%20Underhill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateBook",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\t\t\"isbn\": \"9874854690321\",\r\n\t\t\t\"titre\": \"Le Prince de Belle l'Air\",\r\n\t\t\t\"auteur\": \"Lou Dodd\",\r\n\t\t\t\"editeur\": \"shooting\",\r\n\t\t\t\"edition\": 2017,\r\n\t\t\t\"disponible\": true\r\n\t\t}"
+						},
+						"url": {
+							"raw": "{{server-gateway}}/api/books/isbn/9874854690321",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"books",
+								"isbn",
+								"9874854690321"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetBookByTitle",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/books/titre/Cendrillon",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"books",
+								"titre",
+								"Cendrillon"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetBookDisponible",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/books/disponible",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"books",
+								"disponible"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteBookByIsbn",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/books/isbn/8874392156890",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"books",
+								"isbn",
+								"8874392156890"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllBooks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/books",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"books"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reader",
+			"item": [
+				{
+					"name": "AddManyReaders",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n\t\t{\r\n\t\t\t\"nom\": \"Echevarria\",\r\n\t\t\t\"prenom\": \"Vada\",\r\n            \"genre\" : \"M\",\r\n\t\t\t\"dateNaissance\": \"2004-10-07\",\r\n\t\t\t\"adresse\": \"1 Avenue du docteur Lamaze 93200 Saint-Denis \"\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"nom\": \"Ledet\",\r\n\t\t\t\"prenom\": \"Hae\",\r\n            \"genre\" : \"M\",\r\n\t\t\t\"dateNaissance\": \"1997-01-02\",\r\n\t\t\t\"adresse\":\"12 rue des Lilas 75019 Paris\"\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"nom\": \"Hutchins\",\r\n\t\t\t\"prenom\": \"Rosenda\",\r\n            \"genre\" : \"F\",\r\n\t\t\t\"dateNaissance\": \"1979-10-17\",\r\n\t\t\t\"adresse\": \"13 rue de la fontaine 75014 Paris\"\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"nom\": \"Hampton\",\r\n\t\t\t\"prenom\": \"Maryrose\",\r\n            \"genre\" : \"F\",\r\n\t\t\t\"dateNaissance\": \"1999-05-24\",\r\n\t\t\t\"adresse\": \"15 rue colin 69100 Villeurbanne\"\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"nom\": \"Huntington\",\r\n\t\t\t\"prenom\": \"Catarina\",\r\n            \"genre\" : \"F\",\r\n\t\t\t\"dateNaissance\": \"2000-09-23\",\r\n\t\t\t\"adresse\": \"14 rue Josephine Becker 69001 Lyon\"\r\n\t\t}\r\n\t]"
+						},
+						"url": {
+							"raw": "{{server-gateway}}/api/readers/createmanyreaders",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"readers",
+								"createmanyreaders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddOneReader",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"nom\": \"Diouf\",\r\n\t\t\t\"prenom\": \"Zawi\",\r\n            \"genre\" : \"F\",\r\n\t\t\t\"dateNaissance\": \"2000-02-11\",\r\n\t\t\t\"adresse\": \"25 rue colin 69100 Villeurbanne\"\r\n}"
+						},
+						"url": {
+							"raw": "{{server-gateway}}/api/readers",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"readers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAReaderById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/readers/3",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"readers",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fail_NotFound_GetReaderById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/readers/100",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"readers",
+								"100"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fail_NotFound_ReaderName_N_Surname",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/readers/nomAndPrenom?nom=diouf&prenom=mouha",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"readers",
+								"nomAndPrenom"
+							],
+							"query": [
+								{
+									"key": "nom",
+									"value": "diouf"
+								},
+								{
+									"key": "prenom",
+									"value": "mouha"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateReader",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": 6,\r\n        \"genre\": \"M\",\r\n        \"nom\": \"Diouf\",\r\n        \"prenom\": \"Samba\",\r\n        \"dateNaissance\": \"2000-02-11\",\r\n        \"adresse\": \"16 Avenue du docteur Lamaze 93200 Saint-Denis\"\r\n}"
+						},
+						"url": {
+							"raw": "{{server-gateway}}/api/readers/6",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"readers",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetReaderByNomAndPrenom Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/readers/nomAndPrenom?nom=diouf&prenom=samba",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"readers",
+								"nomAndPrenom"
+							],
+							"query": [
+								{
+									"key": "nom",
+									"value": "diouf"
+								},
+								{
+									"key": "prenom",
+									"value": "samba"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetReaderByDatenaissance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/readers/dateNaissance?dateNaissance=2000-02-11",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"readers",
+								"dateNaissance"
+							],
+							"query": [
+								{
+									"key": "dateNaissance",
+									"value": "2000-02-11"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteReaderById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/readers/5",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"readers",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllReader",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/readers",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"readers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetReaderByNom",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/readers/nom/diouf",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"readers",
+								"nom",
+								"diouf"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subscription_Plan",
+			"item": [
+				{
+					"name": "AddManySubscriptionPlans",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n\t\t{\r\n\t\t\t\"nom\": \"Standard\",\r\n\t\t\t\"dureeEnMois\": 1,\r\n            \"nombreEmpruntParSemaine\" : 3\r\n\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"nom\": \"Premium\",\r\n\t\t\t\"dureeEnMois\": 3,\r\n            \"nombreEmpruntParSemaine\" : 20\r\n\r\n\t\t}\r\n\r\n\t]"
+						},
+						"url": {
+							"raw": "{{server-gateway}}/api/subscriptionplans/createmany",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"subscriptionplans",
+								"createmany"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddOnePlan",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "        {\r\n\t\t\t\"nom\": \"Platine\",\r\n\t\t\t\"dureeEnMois\": 12,\r\n            \"nombreEmpruntParSemaine\" : 50\r\n\t\t}"
+						},
+						"url": {
+							"raw": "{{server-gateway}}/api/subscriptionplans",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"subscriptionplans"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fail_Plan_Exist",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "        {\r\n\t\t\t\"nom\": \"Platine\",\r\n\t\t\t\"dureeEnMois\": 12,\r\n            \"nombreEmpruntParSemaine\" : 50\r\n\t\t}"
+						},
+						"url": {
+							"raw": "{{server-gateway}}/api/subscriptionplans",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"subscriptionplans"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAPlanById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/subscriptionplans/1",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"subscriptionplans",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fail_NotFound_GetPlanById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/subscriptionplans/100",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"subscriptionplans",
+								"100"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPlanByName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/subscriptionplans/nom/standard",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"subscriptionplans",
+								"nom",
+								"standard"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdatePlan",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nom\": \"Standard\",\r\n    \"dureeEnMois\": 1,\r\n    \"nombreEmpruntParSemaine\": 1\r\n}"
+						},
+						"url": {
+							"raw": "{{server-gateway}}/api/subscriptionplans/1",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"subscriptionplans",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletePlanById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/subscriptionplans/3",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"subscriptionplans",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllPlans",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/subscriptionplans",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"subscriptionplans"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subscription",
+			"item": [
+				{
+					"name": "AddOneSubscription",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{server-gateway}}/api/subscriptions/reader/1/plan/1",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"subscriptions",
+								"reader",
+								"1",
+								"plan",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddOneSubscription reader 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{server-gateway}}/api/subscriptions/reader/2/plan/1",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"subscriptions",
+								"reader",
+								"2",
+								"plan",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddOneSubscription reader 3",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{server-gateway}}/api/subscriptions/reader/3/plan/1",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"subscriptions",
+								"reader",
+								"3",
+								"plan",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Replace Subscription reader 3",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{server-gateway}}/api/subscriptions/reader/3/plan/2",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"subscriptions",
+								"reader",
+								"3",
+								"plan",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllSubscriptions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/subscriptions",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"subscriptions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Subscription",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{server-gateway}}/api/subscriptions/cancel/reader/2",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"subscriptions",
+								"cancel",
+								"reader",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fail_Reader_Without_Valid_Subscription",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{server-gateway}}/api/subscriptions/cancel/reader/6",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"subscriptions",
+								"cancel",
+								"reader",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetSubscriptionsValid",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "        {\r\n\t\t\t\"nom\": \"Platine\",\r\n\t\t\t\"dureeEnMois\": 12,\r\n            \"nombreEmpruntParSemaine\" : 100\r\n\r\n\t\t}"
+						},
+						"url": {
+							"raw": "{{server-gateway}}/api/subscriptions/valid",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"subscriptions",
+								"valid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetASubsctiptionById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/subscriptions/1",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"subscriptions",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetSubsctiptionsByReaderId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/subscriptions/reader/3",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"subscriptions",
+								"reader",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetSubsctiptionValidByReaderId Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/subscriptions/reader/valid/3",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"subscriptions",
+								"reader",
+								"valid",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetSubsctiptionByPlanId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/subscriptions/plan/1",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"subscriptions",
+								"plan",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Loan",
+			"item": [
+				{
+					"name": "CreateLoan_1 Reader 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/loans/reader/1/book/142XHNS4QCORZB74",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"loans",
+								"reader",
+								"1",
+								"book",
+								"142XHNS4QCORZB74"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateLoan_2 Reader 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/loans/reader/1/book/142XHNS4QCORZB74",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"loans",
+								"reader",
+								"1",
+								"book",
+								"142XHNS4QCORZB74"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fail_reader_without_sub",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/loans/reader/2/book/9874854690321",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"loans",
+								"reader",
+								"2",
+								"book",
+								"9874854690321"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fail_quota_emprunt_atteint",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/loans/reader/1/book/9874854690321",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"loans",
+								"reader",
+								"1",
+								"book",
+								"9874854690321"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateLoan Reader 3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/loans/reader/3/book/9874854690321",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"loans",
+								"reader",
+								"3",
+								"book",
+								"9874854690321"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ReturnBook loan_1",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/loans/return/reader/1/book/6743857690321",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"loans",
+								"return",
+								"reader",
+								"1",
+								"book",
+								"6743857690321"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get loan in process",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/loans/enCours",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"loans",
+								"enCours"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ReturnBook loan_3",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/loans/return/reader/3/book/9874854690321",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"loans",
+								"return",
+								"reader",
+								"3",
+								"book",
+								"9874854690321"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetNoReturnedLoansByReader",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/loans/booksNoReturnedByReader/1",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"loans",
+								"booksNoReturnedByReader",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get list loan by user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/loans/reader/1",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"loans",
+								"reader",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get loan on date : ....",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-gateway}}/api/loans/getBydateEmprunt/2023-04-14",
+							"host": [
+								"{{server-gateway}}"
+							],
+							"path": [
+								"api",
+								"loans",
+								"getBydateEmprunt",
+								"2023-04-14"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "server-gateway",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
