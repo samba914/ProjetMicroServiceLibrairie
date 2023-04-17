@@ -19,7 +19,6 @@ public class BookController {
     @Autowired
     private IBookService bookService;
 
-    @Cacheable(value = "booksCache")
     @GetMapping
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
@@ -45,42 +44,37 @@ public class BookController {
         return bookService.getBooksByAuteur(auteur);
     }
 
-    @CachePut(value = "bookCache", key = "#livre.isbn")
-    @CacheEvict(value = "booksCache" , allEntries = true)
+
     @PostMapping
     public ResponseEntity<Book> createBook(@RequestBody Book livre) {
         Book createdLivre = bookService.createBook(livre);
         return new ResponseEntity<>(createdLivre, HttpStatus.CREATED);
     }
 
-    @CacheEvict(value = "booksCache" , allEntries = true)
+
     @PostMapping("/createmanybooks")
     public ResponseEntity<List<Book>> createManyBooks(@RequestBody List<Book> livres) {
         List<Book> createdLivres = bookService.createManyBooks(livres);
         return new ResponseEntity<>(createdLivres, HttpStatus.CREATED);
     }
 
-    @CachePut(value = "bookCache", key = "#isbn")
-    @CacheEvict(value = "booksCache" , allEntries = true)
+
     @PutMapping("/isbn/{isbn}")
     public Book updateBook(@PathVariable String isbn, @RequestBody Book livreDetails) {
         return bookService.updateBook(isbn, livreDetails);
     }
 
-    @CachePut(value = "bookCache", key = "#isbn")
-    @CacheEvict(value = "booksCache" , allEntries = true)
     @PutMapping("/isbn/{isbn}/updateState")
     public Book updateBookState(@PathVariable String isbn, @RequestParam boolean disponible) {
         return bookService.updateBookState(isbn, disponible);
     }
 
-    @CacheEvict(value = {"booksCache","booksCaches"}, allEntries = true, key = "#isbn")
     @DeleteMapping("/isbn/{isbn}")
     public ResponseEntity<String> deleteBook(@PathVariable String isbn) {
         bookService.deleteBook(isbn);
         return ResponseEntity.ok("Livre supprimé avec succès");
     }
-    @CacheEvict(value = "booksCaches", allEntries = true)
+
     @DeleteMapping("/deleteAll")
     public ResponseEntity<String> deleteAllBooks() {
         bookService.deleteAllBooks();
@@ -93,7 +87,6 @@ public class BookController {
 
     }
 
-    @Cacheable(value = "bookCache" , key="#isbn")
     @GetMapping("/isbn/{isbn}")
     public ResponseEntity<Book> getBookByIsbn(@PathVariable String isbn) {
         return ResponseEntity.ok(bookService.getBookByIsbn(isbn));
